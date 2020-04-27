@@ -10,4 +10,4 @@ This is the prototype of the program. It manages some functionalities of Contain
 
 It is a simple python program. Just download it and execute it. Follow the below procedure to use the tool:
 
-Get the tool by the command: `git clone https://github.com/HarishankarD29/Docker_Assistant.git` or you can just download the file from the link https://github.com/HarishankarD29/Docker_Assistant/blob/master/Docker_Assistant.py.
+Get the tool by the command: `git clone https://github.com/HarishankarD29/Docker_Assistant.git` or you can just download the file from the link https://github.com/C0SM0Knight/Docker_Assistant.git
