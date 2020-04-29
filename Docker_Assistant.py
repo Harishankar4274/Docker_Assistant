@@ -22,7 +22,7 @@ def docker_install():
     ans = str(input("Do you want to install docker (y/n): "))
     if ans == 'y':
         print("Downloading the Docker Engine....")
-        os.system("curl -sSL https://get.docker.com | sh")
+        os.system("sudo curl -sSL https://get.docker.com | sh")
         os.system("yum -y install docker-ce")
         os.system("systemctl start docker")
         os.system("systemctl enable docker")
@@ -239,7 +239,7 @@ def compose_install():
     ans = str(input("Do you want to install docker-compose (y/n) : "))
     if ans == 'y':
         print("Installing docker-compose...")
-        os.system("pip install docker-compose")
+        os.system("pip3 install docker-compose")
     elif ans == 'n':
         print("Returning to MAIN MENU...")
         docker_components()
