@@ -27,6 +27,7 @@ def docker_install():
         os.system("systemctl start docker")
         os.system("systemctl enable docker")
         os.system("systemctl status docker")
+        docker_status()
     elif ans == 'n':
         print("OK then.... Goodbye....")
         exit()
@@ -256,6 +257,7 @@ def compose_install():
     if ans == 'y':
         print("Installing docker-compose...")
         os.system("pip3 install docker-compose")
+        compose_status()
     elif ans == 'n':
         print("Returning to MAIN MENU...")
         retry_main_menu()
