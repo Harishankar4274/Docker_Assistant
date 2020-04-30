@@ -256,7 +256,7 @@ def compose_install():
 def retry_main_menu():
     ans = str(input("Do you want to go to MAIN MENU (y/n): "))
     if ans == 'y':
-        docker_components()
+        home()
     elif ans == 'n':
         print("OK then.... Good Bye...")
         exit()
@@ -303,25 +303,27 @@ def retry_volume():
         print("Invalid Option. Please try again. Good Bye...")
         retry_volume()
 
-print("""\n\n\n\t\t\tWELCOME TO DOCKER ADMIN\n\n
-This is a python program that will assist you while using dockers""")
-status = docker_status()
+def home():
+    print("""\n\n\n\t\t\tWELCOME TO DOCKER ADMIN\n\n
+    This is a python program that will assist you while using dockers""")
+    status = docker_status()
 
-if status == 1:
-    ch = docker_components()
-else:
-    docker_install()
+    if status == 1:
+        ch = docker_components()
+    else:
+        docker_install()
 
-if ch == '1':
-    container()
-elif ch == '2':
-    ch == image()
-elif ch == '3':
-    ch == volume()
-elif ch == '4':
-    docker_compose()
-elif ch == 'e':
-    exit()
-else:
-    retry_main_menu()
+    if ch == '1':
+        container()
+    elif ch == '2':
+        ch == image()
+    elif ch == '3':
+        ch == volume()
+    elif ch == '4':
+        docker_compose()
+    elif ch == 'e':
+        exit()
+    else:
+        retry_main_menu()
 
+home()
