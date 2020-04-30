@@ -258,7 +258,7 @@ def compose_install():
         os.system("pip3 install docker-compose")
     elif ans == 'n':
         print("Returning to MAIN MENU...")
-        docker_components()
+        retry_main_menu()
     else:
         ans = str(input("Invalid Entry. Do you want to try again (y/n) : "))
         if ans == 'y':
