@@ -23,7 +23,7 @@ def docker_install():
     if ans == 'y':
         print("Downloading the Docker Engine....")
         os.system("curl -sSL https://get.docker.com | sh")
-        os.system("yum -y install docker-ce")
+        os.system("yum -y install docker-ce --nobest")
         os.system("systemctl start docker")
         os.system("systemctl enable docker")
         os.system("systemctl status docker")
