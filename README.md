@@ -1,10 +1,10 @@
 # Docker_Assitant
 
-Docker Assistant is a administrating tool for Docker.
-
-It installs and manages other components of Docker like Containers, Images and Volumes.
-
+Docker Assistant is a TUI based administrating tool for Docker on RHEL/CentOS platforms.
+It installs and manages other components of Docker like Containers, Images and Volumes(under development).
 This is the prototype of the program. It manages some functionalities of Containers, Images and Volumes.
+
+It is an **Opensource** tool anyone use it and develop it accordingly.
 
 ## Prerequisites:
 
