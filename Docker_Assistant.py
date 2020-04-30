@@ -10,11 +10,11 @@ def docker_status():
     if flag != 0:
         print("\ndocker is not installed int this system.\n")
         docker_install()
-        flag=0
+        status=0
     else:
-        print("Docker is installed.\n")
-        flag=1
-    return(flag)
+        print("\nDocker is installed.\n")
+        status=1
+    return(status)
 
 # Installing Docker
 
@@ -76,6 +76,16 @@ def main_menu(ch):
         exit()
     else:
         retry_main_menu()
+
+# Docker Status Check
+
+def check_in(status):
+
+    if status == 1:
+        ch = docker_components()
+        main_menu(ch)
+    else:
+        docker_install()
 
 # Container Operations
 
@@ -325,10 +335,4 @@ def retry_volume():
 print("""\n\n\n\t\t\tWELCOME TO DOCKER ADMIN\n\n
 This is a python program that will assist you while using dockers""")
 status = docker_status()
-
-if status == 1:
-    ch = docker_components()
-    main_menu(ch)
-else:
-    docker_install()
-    
+check_in(status)
