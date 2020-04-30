@@ -255,7 +255,7 @@ def compose_install():
     ans = str(input("Do you want to install docker-compose (y/n) : "))
     if ans == 'y':
         print("Installing docker-compose...")
-        os.system("pip install docker-compose")
+        os.system("pip3 install docker-compose")
     elif ans == 'n':
         print("Returning to MAIN MENU...")
         docker_components()
