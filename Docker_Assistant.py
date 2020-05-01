@@ -27,7 +27,8 @@ def docker_install():
         os.system("systemctl start docker")
         os.system("systemctl enable docker")
         os.system("systemctl status docker")
-        docker_status()
+        status = docker_status()
+        check_in(status)
     elif ans == 'n':
         print("OK then.... Goodbye....")
         exit()
