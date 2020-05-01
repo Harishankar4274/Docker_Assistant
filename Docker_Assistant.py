@@ -237,17 +237,23 @@ def volume():
         print("Coming Soon... ")
         retry_main_menu()
 
-# Docker Compose
+# Dcoker Compose operations
 
-def docker_compose():
-    print("\n\n\n\t\t\tDOCKER COMPOSE\n\n\n")
-    status = compose_status()
+def compose_ops(status):
     if status == 1:
+        print("\ndocker-compose is installed\n")
         path = str(input("Enter path to docker compose file: "))
         os.system("cd {}".format(path))
         os.system("docker-compose up -d")
     else:
         compose_install()
+
+# Docker Compose
+
+def docker_compose():
+    print("\n\n\n\t\t\tDOCKER COMPOSE\n\n\n")
+    status = compose_status()
+    compose_ops(status)
 
 # Docker Compose Status
 
@@ -255,11 +261,11 @@ def compose_status():
     flag = os.system("docker-compose -v")
     if flag == 0:
         print("docker-compose is installed")
-        flag = 1
+        status = 1
     else:
         compose_install()
-        flag = 0
-    return(flag)
+        status = 0
+    return(status)
 
 # Docker Compose installation
 
@@ -268,7 +274,8 @@ def compose_install():
     if ans == 'y':
         print("Installing docker-compose...")
         os.system("pip3 install docker-compose")
-        compose_status()
+        status = compose_status()
+        compose_ops(status)
     elif ans == 'n':
         print("Returning to MAIN MENU...")
         retry_main_menu()
