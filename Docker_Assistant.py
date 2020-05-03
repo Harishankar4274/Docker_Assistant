@@ -10,11 +10,11 @@ def docker_status():
     if flag != 0:
         print("\ndocker is not installed int this system.\n")
         docker_install()
-        flag=0
+        status=0
     else:
-        print("Docker is installed.\n")
-        flag=1
-    return(flag)
+        print("\nDocker is installed.\n")
+        status=1
+    return(status)
 
 # Installing Docker
 
@@ -22,11 +22,13 @@ def docker_install():
     ans = str(input("Do you want to install docker (y/n): "))
     if ans == 'y':
         print("Downloading the Docker Engine....")
-        os.system("sudo curl -sSL https://get.docker.com | sh")
-        os.system("yum -y install docker-ce")
+        os.system("curl -sSL https://get.docker.com | sh")
+        os.system("yum -y install docker-ce --nobest")
         os.system("systemctl start docker")
         os.system("systemctl enable docker")
         os.system("systemctl status docker")
+        status = docker_status()
+        check_in(status)
     elif ans == 'n':
         print("OK then.... Goodbye....")
         exit()
@@ -59,6 +61,32 @@ def docker_components():
     """)
     ch = str(input("Please choose an option: "))
     return(ch)
+
+# Main Menu
+
+def main_menu(ch):
+    if ch == '1':
+        container()
+    elif ch == '2':
+        ch == image()
+    elif ch == '3':
+        ch == volume()
+    elif ch == '4':
+        docker_compose()
+    elif ch == 'e':
+        exit()
+    else:
+        retry_main_menu()
+
+# Docker Status Check
+
+def check_in(status):
+
+    if status == 1:
+        ch = docker_components()
+        main_menu(ch)
+    else:
+        docker_install()
 
 # Container Operations
 
@@ -131,7 +159,7 @@ def container():
             print("Ok then... Goodbye...")
             exit()
         elif ch == 'b':
-            docker_components()
+            retry_main_menu()
         else :
             print("Invalid option. Please make a valid entry and try again")
             retry_container()
@@ -197,7 +225,7 @@ def image():
             print("Ok then... Goodbye...")
             exit()
         elif ch == 'b':
-            docker_components()
+            retry_main_menu()
         else :
             print("Invalid option. Please make a valid entry and try again")
             retry_image()
@@ -209,17 +237,23 @@ def volume():
         print("Coming Soon... ")
         retry_main_menu()
 
-# Docker Compose
+# Dcoker Compose operations
 
-def docker_compose():
-    print("\n\n\n\t\t\tDOCKER COMPOSE\n\n\n")
-    status = compose_status()
+def compose_ops(status):
     if status == 1:
+        print("\ndocker-compose is installed\n")
         path = str(input("Enter path to docker compose file: "))
         os.system("cd {}".format(path))
         os.system("docker-compose up -d")
     else:
         compose_install()
+
+# Docker Compose
+
+def docker_compose():
+    print("\n\n\n\t\t\tDOCKER COMPOSE\n\n\n")
+    status = compose_status()
+    compose_ops(status)
 
 # Docker Compose Status
 
@@ -227,11 +261,11 @@ def compose_status():
     flag = os.system("docker-compose -v")
     if flag == 0:
         print("docker-compose is installed")
-        flag = 1
+        status = 1
     else:
         compose_install()
-        flag = 0
-    return(flag)
+        status = 0
+    return(status)
 
 # Docker Compose installation
 
@@ -239,10 +273,12 @@ def compose_install():
     ans = str(input("Do you want to install docker-compose (y/n) : "))
     if ans == 'y':
         print("Installing docker-compose...")
-        os.system("pip install docker-compose")
+        os.system("pip3 install docker-compose")
+        status = compose_status()
+        compose_ops(status)
     elif ans == 'n':
         print("Returning to MAIN MENU...")
-        docker_components()
+        retry_main_menu()
     else:
         ans = str(input("Invalid Entry. Do you want to try again (y/n) : "))
         if ans == 'y':
@@ -256,7 +292,8 @@ def compose_install():
 def retry_main_menu():
     ans = str(input("Do you want to go to MAIN MENU (y/n): "))
     if ans == 'y':
-        docker_components()
+        ch = docker_components()
+        main_menu(ch)
     elif ans == 'n':
         print("OK then.... Good Bye...")
         exit()
@@ -306,22 +343,4 @@ def retry_volume():
 print("""\n\n\n\t\t\tWELCOME TO DOCKER ADMIN\n\n
 This is a python program that will assist you while using dockers""")
 status = docker_status()
-
-if status == 1:
-    ch = docker_components()
-else:
-    docker_install()
-
-if ch == '1':
-    container()
-elif ch == '2':
-    ch == image()
-elif ch == '3':
-    ch == volume()
-elif ch == '4':
-    docker_compose()
-elif ch == 'e':
-    exit()
-else:
-    retry_main_menu()
-
+check_in(status)

@@ -8,9 +8,9 @@ services:
       restart: always
       environment:
          MYSQL_ROOT_PASSWORD: docker
-         MYSQL_USER: hari
+         MYSQL_USER: user
          MYSQL_PASSWORD: docker
-         MYSQL_DATABASE: mydb
+         MYSQL_DATABASE: mydb_new
 
    my-web-srvr:
       image: wordpress:5.1.1-php7.3-apache
@@ -21,12 +21,12 @@ services:
          - 8081:80
       environment:
          WORDPRESS_DB_HOST: my-db-srvr
-         WORDPRESS_DB_USER: hari
+         WORDPRESS_DB_USER: user
          WORDPRESS_DB_PASSWORD: docker
          WORDPRESS_DB_NAME: mydb
       volumes:
-         - wp_storage:/var/www/html
+         - wp_storage_new:/var/www/html
 
 volumes:
-   wp_storage:
-   mysql_storage:
+   wp_storage_new:
+   mysql_storage_new:
